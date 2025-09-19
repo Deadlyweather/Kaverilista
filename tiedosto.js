@@ -2,32 +2,37 @@ let lomake = document.forms["FormNewItem"];
 let itemlist = document.getElementById("itemlist");
 
 document.addEventListener("submit", UusiListaElementti)
-itemlist.addEventListener("click", ItemInClick);
+itemlist.addEventListener("click", itemInKlikkaus)
 
 
 function UusiListaElementti(event) {
 
     event.preventDefault()
 
-    if (elementinNimi.lenght < 1) {
+
+    let elementinNimi = document.querySelector("#main input[type=text]").value;
+
+    if (elementinNimi.length < 1) {
         alert("Tyhjä syöte!");
         return;
-        }
+    }
 
-    let elementinNimi = document.queryselector("#main input[type=text]").value;
-
-    let NewElement = document.createElement("li");
+    let uusiElementti = document.createElement("li");
     let uusiElementtiTeksti = document.createTextNode(elementinNimi);
     uusiElementti.appendChild(uusiElementtiTeksti);
     uusiElementti.className = "list-item";
     
-    document.querySelector("#itemlist").appendChild(NewElement);
+    document.querySelector("#itemlist").appendChild(uusiElementti);
+    lomake.reset();
 }
-function ItemInClick(event){
-    console.log("klikkasit listaa");
-    console.log(event);
-    TerminateItem(event.document, Parent);
+
+function itemInKlikkaus(event){
+    console.log("klikkaus")
+    console.log(event.target)
+    let parentti = event.target.parentElement;
+    poistaItem = (event.target, parentti)
 }
-function TerminateItem(DeleteItem, ParentElement){
-    ParentElement.removeChild(DeleteItem);
+
+function poistaItem(poistettavaElementti, elementinParentti){
+    elementinParentti.removeChild(poistettavaElementti);
 }
